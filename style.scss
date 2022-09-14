@@ -1,6 +1,17 @@
 $aw: hsl(0, 0%, 98%); // almost white
 $mg: hsl(0, 0%, 41%); // medium grey
 $ab: hsl(0, 0%, 8%);  // almost black
+$desktop-size: 830px;
+@mixin phone{
+  @media screen and (max-width: ($desktop-size - 1px)) { @content; }
+}
+@mixin desktop{
+  @media screen and (min-width: $desktop-size) { @content; }
+}
+@mixin reset-button{
+	background:transparent;
+	border:none;
+}
 *{
 	box-sizing: border-box;
 	font-family: 'Epilogue', sans-serif;
@@ -8,35 +19,175 @@ $ab: hsl(0, 0%, 8%);  // almost black
 body{
 	background-color:$aw;
 }
+.overlay{
+	@include desktop{
+		display:none;	
+	}
+	@include phone{
+		display:none;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		position:fixed;
+		background-color:rgba(0,0,0,.6);
+		&.active{
+			display:block;
+		}
+	}
+}
 nav{
 	display:flex;
-	justify-content:space-between;
 	align-items:center;
 	padding:10px 30px;
+	@include phone{
+		padding-top:22px;
+		justify-content:space-between;
+	}
+	>img{
+		@include desktop{
+			margin-top:-13px;
+		}
+	}
 	>div{
 		display:flex;
 		align-items:center;
-		img{
-			margin-top:5px;
+		flex-grow:1;
+		justify-content:space-between;
+		right:-230px;
+		transition:right 200ms cubic-bezier(0.4, 0, 0.2, 1);
+		@include phone{
+			display:flex;
+			top:0px;
+			justify-content:start;
+			bottom:0;
+			position:fixed;	
+			padding-top:22px;
+			flex-direction:column;
+			width:230px;
+			background-color:$aw;
+			z-index:2;
+			&.active{
+				right:0;
+				.overlay{
+					display:block;
+				}
+			}
 		}
-		ul{
+		#close-button{
+			@include reset-button;
+			cursor:pointer;
+			@include desktop{
+				display:none;
+			}
+			@include phone{
+				align-self:flex-end;
+				margin-right:30px;
+			}
+		}
+		>ul{
 			display:flex;
 			color:$mg;
-			li{
-				overflow:hidden;
+			align-self:start;
+			@include phone{
+				flex-direction:column;
+			}
+			>li{
+				list-style:none;
+				position:relative;
+				height:100%;
+				padding-bottom:13px;
+				display:block;
 				cursor:pointer;
-				margin-right:20px;
+				margin-right:40px;
+				&:hover{
+					color:$ab;
+				}
+				>span{
+					display:flex;
+					align-items:center;
+					>img{
+						margin-left:5px;
+						transition:transform;
+						@include phone{
+							margin-left:15px;
+							margin-top:-2px;
+						}
+					}
+				}
+				&:hover{
+					@include desktop{
+						>ul{
+							display:block;
+						}
+						>span > img {
+							transform:rotate(180deg);
+						}
+					}
+				}
+				>ul{
+					padding:20px 20px 0 ;
+					color:$mg;
+					list-style:none;
+					display:none; // TODO DEBUG 
+					@include phone{
+						&.active{
+							display:block;
+						}
+					}
+					@include desktop{
+						background-color:#ffffff;
+						right:0;
+						border-radius:10px;
+						position:absolute;
+						top:100%;
+						min-width:130px;
+						box-shadow:0px 0px 9px $mg; // TODO change the shadow
+					}
+					>li{
+						&:hover{
+							color:$ab;
+						}
+						display:flex;
+						align-items:center;
+						margin-bottom:20px;
+						>span{
+							margin-left:10px;
+						}
+					}
+				}
 			}
 		}
-		a{
-			color:$mg;
-			margin-right:10px;
-			padding:10px 15px;
-			border-radius:10px;
-			text-decoration: none;
-			&:last-child{
-				border:2px solid $mg;
+		>div{
+			@include phone{
+				width:100%;
+				padding:20px;
 			}
+			a{
+				@include desktop{
+					margin-top:-13px;
+					float:left;
+					margin-right:10px;
+				}
+				@include phone{
+					width:100%;
+				}
+				display:block;
+				color:$mg;
+				padding:10px 15px;
+				border-radius:10px;
+				text-decoration: none;
+				&:last-child{
+					border:2px solid $mg;
+				}
+			}
+		}
+	}
+	> button:last-child{
+		@include reset-button;
+		cursor:pointer;
+		@include desktop{
+			display:none;
 		}
 	}
 }

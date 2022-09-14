@@ -10,20 +10,60 @@
     <title>Intro section with dropdown navigation</title>
   </head>
   <body>
+    <div id="side-overlay" class="overlay"></div>
     <nav>
-      <div>
-        <img width="84" height="27" src="/images/logo.svg" alt="The logo">
+      <img width="84" height="27" src="/images/logo.svg" alt="The logo">
+      <div id="side-menu">
+        <button id="close-button">
+          <img src="/images/icon-close-menu.svg" alt="">
+        </button>
         <ul>
-          <li>Features</li>
-          <li>Company</li>
+          <li class="expandable">
+            <span>
+              <span>Features</span>
+              <img src="/images/icon-arrow-down.svg">
+            </span>
+            <ul>
+              <li>
+                <img src="/images/icon-todo.svg" alt="">
+                <span>Todo  list</span>
+              </li>
+              <li>
+                <img src="/images/icon-calendar.svg" alt="">
+                <span>Calender</span>
+              </li>
+              <li>
+                <img src="/images/icon-reminders.svg" alt="">
+                <span>Reminders</span>
+              </li>
+              <li>
+                <img src="/images/icon-planning.svg" alt="">
+                <span>Planning</span>
+              </li>
+            </ul>
+          </li>
+          <li class="expandable">
+            <span>
+              <span>Company</span>
+              <img src="/images/icon-arrow-down.svg">
+            </span>
+            <ul>
+              <li>History</li>
+              <li>Our Team</li>
+              <li>Blog</li>
+            </ul>
+          </li>
           <li>Careers</li>
           <li>About</li>
         </ul>
+        <div>
+          <a href="/login">Login</a>
+          <a href="/register">Register</a>
+        </div>
       </div>
-      <div>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-      </div>
+      <button id="menu-button">
+        <img src="/images/icon-menu.svg" alt="menu icon">
+      </button>
     </nav>
     <script type="module" src="/main.js"></script>
   </body>
