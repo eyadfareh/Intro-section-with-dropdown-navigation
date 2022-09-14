@@ -18,7 +18,7 @@ function expandList(e){
       break;
     }
     element = element.parentElement;
-    element.children[1].classList.toggle("active");
+    element.classList.toggle("active");
   }
   console.log(element);
 }

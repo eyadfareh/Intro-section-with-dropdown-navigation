@@ -100,6 +100,16 @@ nav{
 				display:block;
 				cursor:pointer;
 				margin-right:40px;
+				@include phone{
+					&.active{
+						ul{
+							display:block;
+						}
+						span>img{
+							transform:rotate(180deg);
+						}
+					}
+				}
 				&:hover{
 					color:$ab;
 				}
@@ -108,7 +118,7 @@ nav{
 					align-items:center;
 					>img{
 						margin-left:5px;
-						transition:transform;
+						transition:transform 200ms ease-in-out;
 						@include phone{
 							margin-left:15px;
 							margin-top:-2px;
@@ -130,11 +140,7 @@ nav{
 					color:$mg;
 					list-style:none;
 					display:none; // TODO DEBUG 
-					@include phone{
-						&.active{
-							display:block;
-						}
-					}
+
 					@include desktop{
 						background-color:#ffffff;
 						right:0;
@@ -171,6 +177,9 @@ nav{
 				}
 				@include phone{
 					width:100%;
+				}
+				&:hover{
+					color:$ab;
 				}
 				display:block;
 				color:$mg;
